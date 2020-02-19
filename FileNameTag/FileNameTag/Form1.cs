@@ -14,9 +14,13 @@ namespace FileNameTag
 
     public partial class MainWindow : Form
     {
+        //用于复原
+        const string OldFileName = "test-三星.txt";//从参数获取
+        const char SeparationChar = '_';
+
         TypeTag typeTags = null;
-        string filename = "test_三星.txt";//从参数获取
-        char separation_character = '_'; //从配置文件读取
+        string filename = null;
+        char separation_character = '_';
         List<string> filename_parts = null;
         string suffiex = null;
         public string Filename
@@ -34,9 +38,11 @@ namespace FileNameTag
             if (filename != "")
                 this.Text = this.Text + " -" + filename;
             //设置文件名
+            filename = OldFileName;
             FlashFileNamePart();
             FlashFileNameBox();
             //设置分隔符
+            separation_character = SeparationChar;
             SeparationBox.Text = separation_character.ToString();
             
 
@@ -47,7 +53,7 @@ namespace FileNameTag
                 TypesBox.Items.Add("-" + type);
                 //Console.WriteLine(type+"="+tags[type]);
             }
-
+            TypesBox.Items.Add("[其他]");
             TypesBox.SetSelected(0, true);
         }
 
@@ -66,6 +72,7 @@ namespace FileNameTag
                 Label label = new Label();
                 label.Text = filename_parts[i];
                 label.AutoSize = true;
+                label.BorderStyle = BorderStyle.FixedSingle;
                 FileNameBox.Controls.Add(label);
                 if (i != filename_parts.Count - 1)
                 {
@@ -75,6 +82,10 @@ namespace FileNameTag
                     FileNameBox.Controls.Add(label2);
                 }
             }
+            Label label3 = new Label();
+            label3.Text = "." + suffiex;
+            label3.AutoSize = true;
+            FileNameBox.Controls.Add(label3);
             Console.WriteLine(filename_parts.Count());
         }
 
@@ -95,6 +106,14 @@ namespace FileNameTag
                 foreach (var tags in typeTags.Values)
                 {
                     tags.ForEach(t => TagsBox.Items.Add(t));
+                }
+            }
+            else if (index == "[其他]")
+            {
+                filename_parts.ForEach(t => TagsBox.Items.Add(t));
+                foreach (var tags in typeTags.Values)
+                {
+                    tags.ForEach(t => TagsBox.Items.Remove(t));
                 }
             }
             else
@@ -127,6 +146,7 @@ namespace FileNameTag
                     {
                         filename_parts.Remove(TagsBox.SelectedItem.ToString());
                         Console.WriteLine(str + "删除成功");
+                        MyTagBox.Text = str;//在MytagBox里保存上一个删除的内容，提供反悔的机会
                     }
 
                     else
@@ -154,16 +174,72 @@ namespace FileNameTag
             SeparationBox.SelectAll();
         }
 
-        private void SeparationBox_TextChanged(object sender, EventArgs e)
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            var str = MyTagBox.Text;
+            if (!filename_parts.Contains(str))
+            {
+                filename_parts.Add(MyTagBox.Text);
+                Console.WriteLine(str + "添加成功");
+            }
+            else
+                Console.WriteLine(str + "已存在");
+            FlashFileNameBox();
+            FlashTagBox();
+        }
+
+        private void MyTagBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            MyTagBox.SelectAll();
+        }
+
+        private string GetCurFileName()
+        {
+            string res = "";
+            foreach(var part in FileNameBox.Controls)
+            {
+                Label a = (Label)part;
+                res+=a.Text;
+            }
+            return res;
+        }
+
+        private void ReSplitButton_Click(object sender, EventArgs e)
         {
             if (SeparationBox.Text.Length > 0)
             {
+                filename = GetCurFileName();
                 separation_character = SeparationBox.Text[0];
                 FlashFileNamePart();
                 FlashFileNameBox();
                 FlashTagBox();
-            
             }
+        }
+
+        private void ReplaceButton_Click(object sender, EventArgs e)
+        {
+            if (SeparationBox.Text.Length > 0)
+            {
+                filename = GetCurFileName();
+                separation_character = SeparationBox.Text[0];
+                FlashFileNameBox();
+
+            }
+            
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            //初始化分隔符
+            separation_character = SeparationChar;
+            SeparationBox.Text = separation_character.ToString();
+            //初始化文件名
+            filename = OldFileName;
+            FlashFileNamePart();
+            FlashFileNameBox();
+            //初始化标签
+            FlashTagBox();
         }
     }
 }
