@@ -34,9 +34,7 @@ namespace FileNameTag
             if (filename != "")
                 this.Text = this.Text + " -" + filename;
             //设置文件名
-            filename_parts = new List<string>(filename.Split(separation_character, '.'));
-            suffiex = filename_parts.Last();
-            filename_parts.RemoveAt(filename_parts.Count - 1);
+            FlashFileNamePart();
             FlashFileNameBox();
             //设置分隔符
             SeparationBox.Text = separation_character.ToString();
@@ -53,7 +51,12 @@ namespace FileNameTag
             TypesBox.SetSelected(0, true);
         }
 
-
+        private void FlashFileNamePart()
+        {
+            filename_parts = new List<string>(filename.Split(separation_character, '.'));
+            suffiex = filename_parts.Last();
+            filename_parts.RemoveAt(filename_parts.Count - 1);
+        }
         private void FlashFileNameBox()
         {
             FileNameBox.Controls.Clear();
@@ -145,5 +148,22 @@ namespace FileNameTag
             }
         }
 
+
+        private void SeparationBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            SeparationBox.SelectAll();
+        }
+
+        private void SeparationBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SeparationBox.Text.Length > 0)
+            {
+                separation_character = SeparationBox.Text[0];
+                FlashFileNamePart();
+                FlashFileNameBox();
+                FlashTagBox();
+            
+            }
+        }
     }
 }

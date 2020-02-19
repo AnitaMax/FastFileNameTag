@@ -41,8 +41,9 @@
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button3 = new System.Windows.Forms.Button();
             this.FileNameBox = new System.Windows.Forms.FlowLayoutPanel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,8 @@
             this.SeparationBox.Size = new System.Drawing.Size(112, 28);
             this.SeparationBox.TabIndex = 0;
             this.SeparationBox.Text = "_";
+            this.SeparationBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SeparationBox_MouseClick);
+            this.SeparationBox.TextChanged += new System.EventHandler(this.SeparationBox_TextChanged);
             // 
             // TagsBox
             // 
@@ -77,7 +80,7 @@
             this.TagsBox.Location = new System.Drawing.Point(339, 198);
             this.TagsBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TagsBox.Name = "TagsBox";
-            this.TagsBox.Size = new System.Drawing.Size(419, 280);
+            this.TagsBox.Size = new System.Drawing.Size(273, 257);
             this.TagsBox.TabIndex = 2;
             this.TagsBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TagsBox_MouseClick);
             // 
@@ -93,7 +96,7 @@
             this.TypesBox.Location = new System.Drawing.Point(89, 198);
             this.TypesBox.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.TypesBox.Name = "TypesBox";
-            this.TypesBox.Size = new System.Drawing.Size(182, 292);
+            this.TypesBox.Size = new System.Drawing.Size(182, 256);
             this.TypesBox.TabIndex = 0;
             this.TypesBox.SelectedIndexChanged += new System.EventHandler(this.TagTypes_SelectedIndexChanged);
             // 
@@ -101,7 +104,7 @@
             // 
             this.编辑类别.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.编辑类别.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.编辑类别.Location = new System.Drawing.Point(192, 498);
+            this.编辑类别.Location = new System.Drawing.Point(192, 465);
             this.编辑类别.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.编辑类别.Name = "编辑类别";
             this.编辑类别.Size = new System.Drawing.Size(79, 34);
@@ -113,7 +116,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(634, 498);
+            this.button1.Location = new System.Drawing.Point(488, 471);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 34);
@@ -125,7 +128,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(89, 498);
+            this.button2.Location = new System.Drawing.Point(89, 465);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(63, 34);
@@ -142,7 +145,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(842, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(696, 33);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -183,17 +186,6 @@
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(174, 30);
             this.帮助ToolStripMenuItem.Text = "帮助";
             // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Location = new System.Drawing.Point(339, 149);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 30);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "刷新";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // FileNameBox
             // 
             this.FileNameBox.AllowDrop = true;
@@ -206,14 +198,36 @@
             this.FileNameBox.Location = new System.Drawing.Point(89, 50);
             this.FileNameBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.FileNameBox.Name = "FileNameBox";
-            this.FileNameBox.Size = new System.Drawing.Size(669, 79);
+            this.FileNameBox.Size = new System.Drawing.Size(523, 79);
             this.FileNameBox.TabIndex = 10;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button4.Location = new System.Drawing.Point(232, 514);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(162, 36);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "保存文件名";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.Location = new System.Drawing.Point(339, 149);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(185, 30);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "保存至配置";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 572);
+            this.ClientSize = new System.Drawing.Size(696, 566);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.FileNameBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -252,8 +266,9 @@
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 更新ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.FlowLayoutPanel FileNameBox;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
     }
 }
 
