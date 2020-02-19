@@ -46,7 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddTagTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTagTypeForm.Designer.cs">
+      <DependentUpon>AddTagTypeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigFileHelper.cs" />
+    <Compile Include="EditFileTypesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditFileTypesForm.Designer.cs">
+      <DependentUpon>EditFileTypesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +67,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddTagTypeForm.resx">
+      <DependentUpon>AddTagTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditFileTypesForm.resx">
+      <DependentUpon>EditFileTypesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
