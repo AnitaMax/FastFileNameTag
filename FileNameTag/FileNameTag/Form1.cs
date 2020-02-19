@@ -10,17 +10,20 @@ using System.Windows.Forms;
 
 namespace FileNameTag
 {
+    using TypeTag = Dictionary<string, List<String>>;
+   
     public partial class MainWindow : Form
     {
-
+         TypeTag typeTags=null;
         public MainWindow()
         {
             InitializeComponent();
             separation.SelectionStart = 0;
-            var s=new FileTagConfigFileHelper().getTags("txt");
-            foreach(var str in s.Keys)
+            typeTags=new FileTagConfigFileHelper().getTags("txt");
+            foreach(var type in typeTags.Keys)
             {
-                Console.WriteLine(str+"="+s[str]);
+                TypesBox.Items.Add("-" + type);
+                //Console.WriteLine(type+"="+tags[type]);
             }
             
            
@@ -33,8 +36,11 @@ namespace FileNameTag
 
         private void TagTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String index = (String)TagTypes.SelectedItem;
+            String index = (String)TypesBox.SelectedItem;
             Console.WriteLine(index);
+            TagsBox.Items.Clear();
+            typeTags[index.Replace("-","")].ForEach(t => TagsBox.Items.Add(t));
+            
         }
 
 

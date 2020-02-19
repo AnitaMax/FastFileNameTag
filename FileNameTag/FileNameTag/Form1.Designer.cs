@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.separation = new System.Windows.Forms.TextBox();
-            this.Tags = new System.Windows.Forms.CheckedListBox();
-            this.TagTypes = new System.Windows.Forms.ListBox();
+            this.TagsBox = new System.Windows.Forms.CheckedListBox();
+            this.TypesBox = new System.Windows.Forms.ListBox();
             this.编辑类别 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -67,34 +67,31 @@
             this.separation.Text = "_";
             this.separation.TextChanged += new System.EventHandler(this.separation_TextChanged);
             // 
-            // Tags
+            // TagsBox
             // 
-            this.Tags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TagsBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tags.FormattingEnabled = true;
-            this.Tags.Location = new System.Drawing.Point(301, 165);
-            this.Tags.Name = "Tags";
-            this.Tags.Size = new System.Drawing.Size(357, 244);
-            this.Tags.TabIndex = 2;
+            this.TagsBox.FormattingEnabled = true;
+            this.TagsBox.Location = new System.Drawing.Point(301, 165);
+            this.TagsBox.Name = "TagsBox";
+            this.TagsBox.Size = new System.Drawing.Size(357, 244);
+            this.TagsBox.TabIndex = 2;
             // 
-            // TagTypes
+            // TypesBox
             // 
-            this.TagTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TypesBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.TagTypes.FormattingEnabled = true;
-            this.TagTypes.ItemHeight = 15;
-            this.TagTypes.Items.AddRange(new object[] {
-            "[所有]",
-            "-类别",
-            "-星级",
-            "[其他]"});
-            this.TagTypes.Location = new System.Drawing.Point(79, 165);
-            this.TagTypes.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.TagTypes.Name = "TagTypes";
-            this.TagTypes.Size = new System.Drawing.Size(162, 244);
-            this.TagTypes.TabIndex = 3;
-            this.TagTypes.SelectedIndexChanged += new System.EventHandler(this.TagTypes_SelectedIndexChanged);
+            this.TypesBox.FormattingEnabled = true;
+            this.TypesBox.ItemHeight = 15;
+            this.TypesBox.Items.AddRange(new object[] {
+            "[所有]"});
+            this.TypesBox.Location = new System.Drawing.Point(79, 165);
+            this.TypesBox.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.TypesBox.Name = "TypesBox";
+            this.TypesBox.Size = new System.Drawing.Size(162, 244);
+            this.TypesBox.TabIndex = 3;
+            this.TypesBox.SelectedIndexChanged += new System.EventHandler(this.TagTypes_SelectedIndexChanged);
             // 
             // 编辑类别
             // 
@@ -170,7 +167,7 @@
             // 打开ToolStripMenuItem
             // 
             this.打开ToolStripMenuItem.Name = "打开ToolStripMenuItem";
-            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.打开ToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
             this.打开ToolStripMenuItem.Text = "打开";
             // 
             // 关于ToolStripMenuItem
@@ -185,13 +182,13 @@
             // 更新ToolStripMenuItem
             // 
             this.更新ToolStripMenuItem.Name = "更新ToolStripMenuItem";
-            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.更新ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.更新ToolStripMenuItem.Text = "检查更新";
             // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.帮助ToolStripMenuItem.Text = "帮助";
             // 
             // MainWindow
@@ -203,8 +200,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.编辑类别);
-            this.Controls.Add(this.TagTypes);
-            this.Controls.Add(this.Tags);
+            this.Controls.Add(this.TypesBox);
+            this.Controls.Add(this.TagsBox);
             this.Controls.Add(this.separation);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
@@ -224,8 +221,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox separation;
-        private System.Windows.Forms.CheckedListBox Tags;
-        private System.Windows.Forms.ListBox TagTypes;
+        private System.Windows.Forms.CheckedListBox TagsBox;
+        private System.Windows.Forms.ListBox TypesBox;
         private System.Windows.Forms.Button 编辑类别;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

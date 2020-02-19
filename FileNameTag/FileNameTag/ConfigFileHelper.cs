@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace FileNameTag
 {
+    using TypeTag = Dictionary<string, List<String>>;
     public class Section
     {
         public String title = "";
@@ -113,12 +114,12 @@ namespace FileNameTag
             }
             return types;
         }
-        public Dictionary<string,string> getTags(string sufflex)
+        public TypeTag getTags(string sufflex)
         {
             //文件类型
             var types = getTypes(sufflex);
             //容器
-            var tags = new Dictionary<string, string>();
+            var tags = new TypeTag();
             //找到文件类型的section
             foreach (var section in sections)
             {
@@ -133,12 +134,12 @@ namespace FileNameTag
                             || taget.Contains("."+sufflex)
                             )
                         {
-                            tags.Add(section.title.Replace("#", ""), section.Contents["标签"]);
+                            tags.Add(section.title.Replace("#", ""), new List<string>(section.Contents["标签"].Split(',')));
                         }
                     }
                     else
                     {
-                        tags.Add(section.title.Replace("#", ""), section.Contents["标签"]);
+                        tags.Add(section.title.Replace("#", ""), new List<string>(section.Contents["标签"].Split(',')));
                     }
                 }
             }
