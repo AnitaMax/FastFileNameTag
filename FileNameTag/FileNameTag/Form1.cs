@@ -89,9 +89,9 @@ namespace FileNameTag
 
         private void FlashFileNamePart()
         {
-            filename_parts = new List<string>(filename.Split(separation_character, '.'));
-            suffiex = filename_parts.Last();
-            filename_parts.RemoveAt(filename_parts.Count - 1);
+            suffiex = filename.Substring((filename.LastIndexOf(".")+1));
+            filename =filename.Substring(0, (filename.LastIndexOf(".") ));
+            filename_parts = new List<string>(filename.Split(separation_character));
         }
         private void FlashFileNameBox()
         {
@@ -279,8 +279,17 @@ namespace FileNameTag
         private void MainWindow_DragDrop(object sender, DragEventArgs e)
         {
             OldPath=((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-            Console.WriteLine(OldPath);
-            init();
+            if (System.IO.File.Exists(OldPath))
+            {
+                Console.WriteLine(OldPath);
+                init();
+            }
+
+
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
 
         }
     }

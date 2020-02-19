@@ -47,7 +47,7 @@
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileNameBox = new System.Windows.Forms.FlowLayoutPanel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.MyTagBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
@@ -246,15 +246,16 @@
             this.FileNameBox.Size = new System.Drawing.Size(552, 79);
             this.FileNameBox.TabIndex = 10;
             // 
-            // button4
+            // SaveButton
             // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button4.Location = new System.Drawing.Point(362, 615);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(162, 36);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "保存文件名";
-            this.button4.UseVisualStyleBackColor = true;
+            this.SaveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.SaveButton.Location = new System.Drawing.Point(362, 615);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(162, 36);
+            this.SaveButton.TabIndex = 11;
+            this.SaveButton.Text = "保存文件名";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // button3
             // 
@@ -329,7 +330,7 @@
             this.Controls.Add(this.ReSplitButton);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.MyTagBox);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.FileNameBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -371,7 +372,7 @@
         private System.Windows.Forms.ToolStripMenuItem 更新ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel FileNameBox;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox MyTagBox;
         private System.Windows.Forms.Button AddButton;
