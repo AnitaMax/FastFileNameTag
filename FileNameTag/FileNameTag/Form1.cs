@@ -21,7 +21,8 @@ namespace FileNameTag
         string suffiex = null;
         public string Filename
         {
-            get => filename; set  {
+            get => filename; set
+            {
                 filename = value;
                 this.Text = this.Text + " -" + filename;
             }
@@ -33,17 +34,37 @@ namespace FileNameTag
             if (filename != "")
                 this.Text = this.Text + " -" + filename;
             //设置文件名
-            filename_parts = new List<string>(filename.Split(separation_character,'.'));
+            filename_parts = new List<string>(filename.Split(separation_character, '.'));
             suffiex = filename_parts.Last();
             filename_parts.RemoveAt(filename_parts.Count - 1);
-            for(int i = 0; i < filename_parts.Count; i++)
+            FlashFileNameBox();
+            //设置分隔符
+            SeparationBox.Text = separation_character.ToString();
+            
+
+            //设置标签类别
+            typeTags = new FileTagConfigFileHelper().getTags(Filename.Split('.').Last());
+            foreach (var type in typeTags.Keys)
+            {
+                TypesBox.Items.Add("-" + type);
+                //Console.WriteLine(type+"="+tags[type]);
+            }
+
+            TypesBox.SetSelected(0, true);
+        }
+
+
+        private void FlashFileNameBox()
+        {
+            FileNameBox.Controls.Clear();
+            for (int i = 0; i < filename_parts.Count; i++)
             {
 
                 Label label = new Label();
                 label.Text = filename_parts[i];
                 label.AutoSize = true;
                 FileNameBox.Controls.Add(label);
-                if(i!= filename_parts.Count - 1)
+                if (i != filename_parts.Count - 1)
                 {
                     Label label2 = new Label();
                     label2.Text = separation_character.ToString();
@@ -51,26 +72,14 @@ namespace FileNameTag
                     FileNameBox.Controls.Add(label2);
                 }
             }
-            //设置分隔符
-            SeparationBox.Text = separation_character.ToString();
-            //分隔符的输入焦点
-            SeparationBox.SelectionStart = 0;
-            
-            //设置标签类别
-            typeTags =new FileTagConfigFileHelper().getTags(Filename.Split('.').Last());
-            foreach(var type in typeTags.Keys)
-            {
-                TypesBox.Items.Add("-" + type);
-                //Console.WriteLine(type+"="+tags[type]);
-            }
-            
-           
+            Console.WriteLine(filename_parts.Count());
         }
 
-
-
-
         private void TagTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FlashTagBox();
+        }
+        private void FlashTagBox()
         {
             //添加对应类别的标签
             String index = (String)TypesBox.SelectedItem;
@@ -80,7 +89,7 @@ namespace FileNameTag
             TagsBox.Items.Clear();
             if (index == "[所有]")
             {
-                foreach(var tags in typeTags.Values)
+                foreach (var tags in typeTags.Values)
                 {
                     tags.ForEach(t => TagsBox.Items.Add(t));
                 }
@@ -99,5 +108,42 @@ namespace FileNameTag
 
             });
         }
+
+        private void TagsBox_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            int index = TagsBox.IndexFromPoint(e.X, e.Y);
+            TagsBox.SelectedIndex = index;
+            if (TagsBox.SelectedIndex != -1)
+            {
+                var str = TagsBox.SelectedItem.ToString();
+                //MessageBox.Show(TagsBox.SelectedItem.ToString());
+                if (TagsBox.GetItemChecked(index))
+                {
+                    if (filename_parts.Contains(str))
+                    {
+                        filename_parts.Remove(TagsBox.SelectedItem.ToString());
+                        Console.WriteLine(str + "删除成功");
+                    }
+
+                    else
+                        Console.WriteLine(str + "不存在");
+               
+                }
+                else
+                {
+                    if (!filename_parts.Contains(str))
+                    {
+                        filename_parts.Add(TagsBox.SelectedItem.ToString());
+                        Console.WriteLine(str + "添加成功");
+                    }
+                    else
+                        Console.WriteLine(str + "已存在");
+                }
+                FlashFileNameBox();
+                FlashTagBox();
+            }
+        }
+
     }
 }
