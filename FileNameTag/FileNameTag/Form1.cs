@@ -15,8 +15,9 @@ namespace FileNameTag
     public partial class MainWindow : Form
     {
         //用于复原
-        const string OldFileName = "test-三星.txt";//从参数获取
-        const char SeparationChar = '_';
+        string OldPath = "";
+         string OldFileName = "test-三星.txt";//从参数获取
+         char SeparationChar = '_';
 
         TypeTag typeTags = null;
         string filename = null;
@@ -31,12 +32,26 @@ namespace FileNameTag
                 this.Text = this.Text + " -" + filename;
             }
         }
-        public MainWindow()
+
+        private void GetArgs()
         {
-            InitializeComponent();
-            //标题栏
-            if (filename != "")
-                this.Text = this.Text + " -" + filename;
+            String[] CmdArgs = System.Environment.GetCommandLineArgs();
+            if (CmdArgs.Length > 1)
+            {
+                //参数0是它本身的路径
+                String arg0 = CmdArgs[0].ToString();
+                String arg1 = CmdArgs[1].ToString();
+
+               // MessageBox.Show(arg1);//显示得到的第一个参数
+
+                OldPath = arg1;
+                
+            }
+        }
+        public void init()
+        {
+            if(OldPath!="")
+                OldFileName = new List<String>(OldPath.Split('\\')).Last();
             //设置文件名
             filename = OldFileName;
             FlashFileNamePart();
@@ -44,9 +59,9 @@ namespace FileNameTag
             //设置分隔符
             separation_character = SeparationChar;
             SeparationBox.Text = separation_character.ToString();
-            
-
             //设置标签类别
+            TypesBox.Items.Clear();
+            TypesBox.Items.Add("[所有]");
             typeTags = new FileTagConfigFileHelper().getTags(Filename.Split('.').Last());
             foreach (var type in typeTags.Keys)
             {
@@ -55,6 +70,21 @@ namespace FileNameTag
             }
             TypesBox.Items.Add("[其他]");
             TypesBox.SetSelected(0, true);
+
+        }
+        public MainWindow()
+        {
+            InitializeComponent();
+            //获取启动参数
+            GetArgs();
+
+            //初始化
+            init();
+
+            //标题栏
+            if (filename != "")
+                this.Text = this.Text + " -" + filename;
+
         }
 
         private void FlashFileNamePart()
@@ -231,15 +261,27 @@ namespace FileNameTag
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            //初始化分隔符
-            separation_character = SeparationChar;
-            SeparationBox.Text = separation_character.ToString();
-            //初始化文件名
-            filename = OldFileName;
-            FlashFileNamePart();
-            FlashFileNameBox();
-            //初始化标签
-            FlashTagBox();
+            init();
+        }
+
+        private void MainWindow_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void MainWindow_DragDrop(object sender, DragEventArgs e)
+        {
+            OldPath=((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            Console.WriteLine(OldPath);
+            init();
+
         }
     }
 }
