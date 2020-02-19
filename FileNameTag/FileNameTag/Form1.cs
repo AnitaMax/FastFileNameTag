@@ -86,6 +86,7 @@ namespace FileNameTag
             if (filename != "")
                 this.Text = this.Text + " -" + filename;
 
+
         }
 
         private void FlashFileNamePart()
