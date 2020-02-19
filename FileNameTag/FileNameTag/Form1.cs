@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace FileNameTag
     {
         //用于复原
         string OldPath = "";
-         string OldFileName = "test-三星.txt";//从参数获取
+         string OldFileName = "test-三星.mp45";//从参数获取
          char SeparationChar = '_';
 
         TypeTag typeTags = null;
@@ -63,7 +65,7 @@ namespace FileNameTag
             //设置标签类别
             TypesBox.Items.Clear();
             TypesBox.Items.Add("[所有]");
-            typeTags = new FileTagConfigFileHelper().getTags(Filename.Split('.').Last());
+            typeTags = new FileTagConfigFileHelper().getTags(suffiex);
             foreach (var type in typeTags.Keys)
             {
                 TypesBox.Items.Add("-" + type);
@@ -305,8 +307,55 @@ namespace FileNameTag
                 Environment.Exit(1);
             }
             MessageBox.Show("重命名成功", "成功！", MessageBoxButtons.OK);
-            Environment.Exit(1);
+            Environment.Exit(0);
 
+        }
+
+        private void 注册右键菜单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RegistryKey reg;
+                reg = Registry.ClassesRoot;
+
+                //创建新项FileNameTag
+                reg = reg.CreateSubKey(@"*\shell\FileNameTag");
+                //设置项值
+                reg.SetValue("", "文件标签");
+
+                reg = Registry.ClassesRoot;
+                //创建新项command
+                reg=reg.CreateSubKey(@"*\shell\FileNameTag\Command");
+                //设置command的值
+                reg.SetValue("", this.GetType().Assembly.Location + " %1");
+
+                reg.Close();
+                MessageBox.Show("右键注册成功", "成功！", MessageBoxButtons.OK);
+            }
+            catch(UnauthorizedAccessException e3)
+            {
+                MessageBox.Show(e3.Message+"请右键管理员权限运行!", "失败", MessageBoxButtons.OK);
+                Environment.Exit(2);
+            }
+        }
+
+        private void 删除右键菜单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            {
+                try
+                {
+                    RegistryKey reg;
+                    reg = Registry.ClassesRoot;
+                    reg.DeleteSubKeyTree(@"*\shell\FileNameTag");
+                    reg.Close();
+                    MessageBox.Show("删除右键菜单成功", "成功！", MessageBoxButtons.OK);
+                }
+                catch (UnauthorizedAccessException e3)
+                {
+                    MessageBox.Show(e3.Message + "请右键管理员权限运行!", "失败", MessageBoxButtons.OK);
+                    Environment.Exit(2);
+                }
+            }
         }
     }
 }

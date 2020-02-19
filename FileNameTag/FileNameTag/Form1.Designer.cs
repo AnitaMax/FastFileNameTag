@@ -57,6 +57,7 @@
             this.BackButton = new System.Windows.Forms.Button();
             this.ToolsPanel = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.删除右键菜单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.ToolsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -218,6 +219,7 @@
             // 
             this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.注册右键菜单ToolStripMenuItem,
+            this.删除右键菜单ToolStripMenuItem,
             this.更新ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.关于ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -228,8 +230,9 @@
             // 注册右键菜单ToolStripMenuItem
             // 
             this.注册右键菜单ToolStripMenuItem.Name = "注册右键菜单ToolStripMenuItem";
-            this.注册右键菜单ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.注册右键菜单ToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
             this.注册右键菜单ToolStripMenuItem.Text = "注册右键菜单";
+            this.注册右键菜单ToolStripMenuItem.Click += new System.EventHandler(this.注册右键菜单ToolStripMenuItem_Click);
             // 
             // 更新ToolStripMenuItem
             // 
@@ -350,6 +353,13 @@
             this.button4.Text = "插入日期";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // 删除右键菜单ToolStripMenuItem
+            // 
+            this.删除右键菜单ToolStripMenuItem.Name = "删除右键菜单ToolStripMenuItem";
+            this.删除右键菜单ToolStripMenuItem.Size = new System.Drawing.Size(224, 30);
+            this.删除右键菜单ToolStripMenuItem.Text = "删除右键菜单";
+            this.删除右键菜单ToolStripMenuItem.Click += new System.EventHandler(this.删除右键菜单ToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AllowDrop = true;
@@ -420,6 +430,7 @@
         private System.Windows.Forms.ToolStripMenuItem 注册右键菜单ToolStripMenuItem;
         private System.Windows.Forms.GroupBox ToolsPanel;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ToolStripMenuItem 删除右键菜单ToolStripMenuItem;
     }
 }
 

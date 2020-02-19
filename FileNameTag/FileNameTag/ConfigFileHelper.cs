@@ -14,11 +14,12 @@ namespace FileNameTag
     public class IniFileHelper
     {
 
-        static String ConfigFilePath = @"../../tags.ini";
+        static String ConfigFilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"..\..\tags.ini";
 
         
         public static List<Section> ReadAllSections()
         {
+           
             //读取配置文件
             string[] lines = null;
             try
