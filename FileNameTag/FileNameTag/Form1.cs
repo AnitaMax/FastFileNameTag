@@ -12,10 +12,18 @@ namespace FileNameTag
 {
     public partial class MainWindow : Form
     {
+
         public MainWindow()
         {
             InitializeComponent();
             separation.SelectionStart = 0;
+            var s=new FileTagConfigFileHelper().getTags("txt");
+            foreach(var str in s.Keys)
+            {
+                Console.WriteLine(str+"="+s[str]);
+            }
+            
+           
         }
 
         private void separation_TextChanged(object sender, EventArgs e)
