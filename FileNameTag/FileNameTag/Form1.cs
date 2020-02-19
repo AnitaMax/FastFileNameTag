@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -290,6 +291,20 @@ namespace FileNameTag
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            FileInfo fileInfo = new FileInfo(OldPath);
+            string newPath = OldPath.Substring(0, OldPath.LastIndexOf('\\') +1)+ GetCurFileName();
+            
+            try
+            {
+                fileInfo.MoveTo(newPath);
+            }
+            catch (Exception e2)
+            {
+                MessageBox.Show(e2.Message, "致命错误", MessageBoxButtons.OK);
+                Environment.Exit(1);
+            }
+            MessageBox.Show("重命名成功", "成功！", MessageBoxButtons.OK);
+            Environment.Exit(1);
 
         }
     }
