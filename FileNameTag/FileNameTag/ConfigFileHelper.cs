@@ -14,9 +14,9 @@ namespace FileNameTag
     public class IniFileHelper
     {
 
-        static String ConfigFilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"..\..\tags.ini";
+        //static String ConfigFilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"..\..\tags.ini";
+        static String ConfigFilePath = @"D:\tags.ini";
 
-        
         public static List<Section> ReadAllSections()
         {
            
