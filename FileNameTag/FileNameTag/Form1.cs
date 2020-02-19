@@ -28,5 +28,7 @@ namespace FileNameTag
             String index = (String)TagTypes.SelectedItem;
             Console.WriteLine(index);
         }
+
+
     }
 }
