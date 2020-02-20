@@ -48,7 +48,7 @@ namespace FileNameTag
                 String arg0 = CmdArgs[0].ToString();
                 String arg1 = CmdArgs[1].ToString();
 
-               // MessageBox.Show(arg1);//显示得到的第一个参数
+               //MessageBox.Show(arg1);//显示得到的第一个参数
 
                 OldPath = arg1;
                 

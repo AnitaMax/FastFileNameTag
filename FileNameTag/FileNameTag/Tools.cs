@@ -15,7 +15,7 @@ namespace FileNameTag
         public static string combine(List<string> src,string s)
         {
             string res = "";
-            if (src != null)
+            if (src != null&&src.Count>0)
             {
                 src.ForEach(a => res += a + s);
                 res = res.Substring(0, res.Length - s.Length);
