@@ -101,7 +101,7 @@ namespace FileNameTag
 
         private void FlashFileNamePart()
         {
-            suffiex = filename.Substring((filename.LastIndexOf(".")+1));
+            suffiex = filename.Substring((filename.LastIndexOf(".")+1)).ToLower();
             filename =filename.Substring(0, (filename.LastIndexOf(".") ));
             filename_parts = new List<string>(filename.Split(separation_character));
         }
