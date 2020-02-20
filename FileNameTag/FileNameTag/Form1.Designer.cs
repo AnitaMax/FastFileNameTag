@@ -32,9 +32,8 @@
             this.SeparationBox = new System.Windows.Forms.TextBox();
             this.TagsBox = new System.Windows.Forms.CheckedListBox();
             this.TypesBox = new System.Windows.Forms.ListBox();
-            this.编辑类别 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.DelTagTypeButton = new System.Windows.Forms.Button();
+            this.AddTagType = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,10 +57,11 @@
             this.BackButton = new System.Windows.Forms.Button();
             this.ToolsPanel = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.FileTypeLable = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.ToolsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -117,42 +117,34 @@
             this.TypesBox.Size = new System.Drawing.Size(182, 184);
             this.TypesBox.TabIndex = 0;
             this.TypesBox.SelectedIndexChanged += new System.EventHandler(this.TagTypes_SelectedIndexChanged);
+            this.TypesBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TypesBox_MouseDoubleClick);
             // 
-            // 编辑类别
+            // DelTagTypeButton
             // 
-            this.编辑类别.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.编辑类别.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.编辑类别.Location = new System.Drawing.Point(161, 483);
-            this.编辑类别.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.编辑类别.Name = "编辑类别";
-            this.编辑类别.Size = new System.Drawing.Size(79, 34);
-            this.编辑类别.TabIndex = 4;
-            this.编辑类别.Text = "删除";
-            this.编辑类别.UseVisualStyleBackColor = true;
+            this.DelTagTypeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.DelTagTypeButton.Enabled = false;
+            this.DelTagTypeButton.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DelTagTypeButton.Location = new System.Drawing.Point(161, 465);
+            this.DelTagTypeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DelTagTypeButton.Name = "DelTagTypeButton";
+            this.DelTagTypeButton.Size = new System.Drawing.Size(79, 34);
+            this.DelTagTypeButton.TabIndex = 4;
+            this.DelTagTypeButton.Text = "删除";
+            this.DelTagTypeButton.UseVisualStyleBackColor = true;
+            this.DelTagTypeButton.Click += new System.EventHandler(this.DelTagTypeButton_Click);
             // 
-            // button1
+            // AddTagType
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(430, 481);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 34);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "删除";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(58, 481);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(63, 34);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "增加";
-            this.button2.UseVisualStyleBackColor = true;
+            this.AddTagType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.AddTagType.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.AddTagType.Location = new System.Drawing.Point(59, 465);
+            this.AddTagType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AddTagType.Name = "AddTagType";
+            this.AddTagType.Size = new System.Drawing.Size(63, 34);
+            this.AddTagType.TabIndex = 6;
+            this.AddTagType.Text = "增加";
+            this.AddTagType.UseVisualStyleBackColor = true;
+            this.AddTagType.Click += new System.EventHandler(this.AddTagType_Click);
             // 
             // menuStrip1
             // 
@@ -259,6 +251,7 @@
             // 
             // FileNameBox
             // 
+            this.FileNameBox.AllowDrop = true;
             this.FileNameBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FileNameBox.AutoScroll = true;
@@ -270,6 +263,8 @@
             this.FileNameBox.Name = "FileNameBox";
             this.FileNameBox.Size = new System.Drawing.Size(454, 79);
             this.FileNameBox.TabIndex = 10;
+            this.FileNameBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.FileNameBox_DragDrop);
+            this.FileNameBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.FileNameBox_DragEnter);
             // 
             // SaveButton
             // 
@@ -366,16 +361,6 @@
             this.button4.Text = "插入日期";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(303, 480);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(68, 35);
-            this.button5.TabIndex = 18;
-            this.button5.Text = "增加";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -385,14 +370,14 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "类别：";
             // 
-            // label3
+            // FileTypeLable
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(127, 139);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 19);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "label3";
+            this.FileTypeLable.AutoSize = true;
+            this.FileTypeLable.Location = new System.Drawing.Point(127, 139);
+            this.FileTypeLable.Name = "FileTypeLable";
+            this.FileTypeLable.Size = new System.Drawing.Size(28, 19);
+            this.FileTypeLable.TabIndex = 20;
+            this.FileTypeLable.Text = "无";
             // 
             // button6
             // 
@@ -401,8 +386,28 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(98, 27);
             this.button6.TabIndex = 21;
-            this.button6.Text = "编辑类别";
+            this.button6.Text = "编辑类型";
             this.button6.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(262, 480);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(161, 19);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "双击标签类别编辑";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 6.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(399, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(113, 12);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "单击删除，拖拽排序";
             // 
             // MainWindow
             // 
@@ -410,10 +415,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 566);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.FileTypeLable);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.ToolsPanel);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.ReplaceButton);
@@ -423,9 +429,8 @@
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.FileNameBox);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.编辑类别);
+            this.Controls.Add(this.AddTagType);
+            this.Controls.Add(this.DelTagTypeButton);
             this.Controls.Add(this.TypesBox);
             this.Controls.Add(this.TagsBox);
             this.Controls.Add(this.SeparationBox);
@@ -453,9 +458,8 @@
         private System.Windows.Forms.TextBox SeparationBox;
         private System.Windows.Forms.CheckedListBox TagsBox;
         private System.Windows.Forms.ListBox TypesBox;
-        private System.Windows.Forms.Button 编辑类别;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button DelTagTypeButton;
+        private System.Windows.Forms.Button AddTagType;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打开ToolStripMenuItem;
@@ -479,10 +483,11 @@
         private System.Windows.Forms.GroupBox ToolsPanel;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripMenuItem 删除右键菜单ToolStripMenuItem;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label FileTypeLable;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

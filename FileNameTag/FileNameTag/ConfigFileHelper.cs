@@ -10,6 +10,16 @@ namespace FileNameTag
     {
         public String title = "";
         public Dictionary<String, String> Contents = new Dictionary<String, String>();
+        public List<string> ToList()
+        {
+            List<string> strs = new List<string>();
+            strs.Add("["+title+"]");
+            foreach(var key in Contents.Keys)
+            {
+                strs.Add(key + " = " + Contents[key]);
+            }
+            return strs;
+        }
     }
     public class IniFileHelper
     {
@@ -81,6 +91,17 @@ namespace FileNameTag
                 }
             }
         }
+
+        public static void Save(List<Section> sections)
+        {
+            List<string> strs = new List<string>();
+            foreach (var section in sections)
+            {
+                section.ToList().ForEach(str => strs.Add(str));
+                strs.Add("     ");
+            }
+            System.IO.File.WriteAllLines(ConfigFilePath, strs.ToArray());
+        }
     }
     public class FileTagConfigFileHelper 
     {
@@ -148,6 +169,54 @@ namespace FileNameTag
 
             return tags;
         } 
+
+        public void AddTagType(string target,string name,string tags)
+        {
+            Section section = new Section();
+            section.title = "#"+name;
+            if (target=="")
+                section.Contents.Add("目标", "所有");
+            else
+                section.Contents.Add("目标", target);
+            section.Contents.Add("标签 ", tags);
+            sections.Add(section);
+            IniFileHelper.Save(sections);
+        }
+        public void DeleteTagType(string name)
+        {
+            for(int i = 0; i < sections.Count; i++)
+            {
+                if (sections[i].title == "#" + name)
+                {
+                    sections.RemoveAt(i);
+                }
+            }
+            IniFileHelper.Save(sections);
+        }
+
+        public void EditTagsType(string target, string name, string tags)
+        {
+            DeleteTagType(name);
+            AddTagType(target, name, tags);
+
+        }
+        public void AddFileType(string name, string suffiexs)
+        {
+            Section section = sections.Where<Section>(s => s.title == "[文件类型]").First();
+            section.Contents.Add(name, suffiexs);
+            IniFileHelper.Save(sections);
+        }
+        public void DeleteFileType(string name)
+        {
+            Section section = sections.Where<Section>(s => s.title == "[文件类型]").First();
+            section.Contents.Remove(name);
+            IniFileHelper.Save(sections);
+        }
+        public void EditSuffiexs(string name, string suffiexs)
+        {
+            DeleteFileType(name);
+            AddFileType(name, suffiexs);
+        }
     }
 
 }

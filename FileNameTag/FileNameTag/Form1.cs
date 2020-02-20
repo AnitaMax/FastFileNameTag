@@ -19,14 +19,17 @@ namespace FileNameTag
     {
         //用于复原
         string OldPath = "";
-         string OldFileName = "test-三星.mp45";//从参数获取
+         string OldFileName = "test-三星.mp4";//从参数获取
          char SeparationChar = '_';
 
+        List<string> filetypes = null;
         TypeTag typeTags = null;
         string filename = null;
         char separation_character = '_';
         List<string> filename_parts = null;
         string suffiex = null;
+
+        private bool down = false;
         public string Filename
         {
             get => filename; set
@@ -62,6 +65,11 @@ namespace FileNameTag
             //设置分隔符
             separation_character = SeparationChar;
             SeparationBox.Text = separation_character.ToString();
+            //设置文件类别
+            filetypes = new FileTagConfigFileHelper().getTypes(suffiex);
+            string ft = Tools.combine(filetypes, ",");
+            if(ft!="")
+                FileTypeLable.Text = ft;
             //设置标签类别
             TypesBox.Items.Clear();
             TypesBox.Items.Add("[所有]");
@@ -107,6 +115,10 @@ namespace FileNameTag
                 label.Text = filename_parts[i];
                 label.AutoSize = true;
                 label.BorderStyle = BorderStyle.FixedSingle;
+                label.Click += FIleNameBoxPartLabel_Click;
+                label.MouseDown += Label_MouseDown;
+                label.MouseUp += Label_MouseUp;
+                label.MouseMove += Label_MouseMove;
                 FileNameBox.Controls.Add(label);
                 if (i != filename_parts.Count - 1)
                 {
@@ -123,9 +135,52 @@ namespace FileNameTag
             Console.WriteLine(filename_parts.Count());
         }
 
+        private void Label_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && down)
+            {
+                down = false;
+                Label label = sender as Label;
+                if (label == null)
+                {
+                    return;
+                }
+                FileNameBox.DoDragDrop(label, DragDropEffects.Move);
+            }
+        }
+
+        private void Label_MouseUp(object sender, MouseEventArgs e)
+        {
+            down = false;
+        }
+
+        private void Label_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                down = true;
+            }
+        }
+
+        private void FIleNameBoxPartLabel_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(((Label)sender).Text);
+            filename_parts.Remove(((Label)sender).Text);
+            FlashFileNameBox();
+            FlashTagBox();
+            MyTagBox.Text = ((Label)sender).Text;
+        }
+
         private void TagTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             FlashTagBox();
+            //删除按钮
+            var cur = TypesBox.SelectedItem.ToString();
+            if (cur.StartsWith("["))
+                DelTagTypeButton.Enabled = false;
+            else
+                DelTagTypeButton.Enabled = true;
+
         }
         private void FlashTagBox()
         {
@@ -356,6 +411,58 @@ namespace FileNameTag
                     Environment.Exit(2);
                 }
             }
+        }
+
+        private void AddTagType_Click(object sender, EventArgs e)
+        {
+            var addTagTypeForm=new AddTagTypeForm(filetypes);
+            addTagTypeForm.ShowDialog();
+            init();
+
+
+        }
+
+        private void TypesBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var name = TypesBox.SelectedItem.ToString();
+            if (name.StartsWith("["))
+                return;
+            var tags = new List<String>();
+            foreach(var tag in TagsBox.Items)
+            {
+                tags.Add(tag.ToString());
+            }
+            var addTagTypeForm = new AddTagTypeForm(filetypes,name.Remove(0,1),tags);
+            addTagTypeForm.Text = "编辑标签";
+            addTagTypeForm.ShowDialog();
+            init();
+            TypesBox.SelectedItem = name;
+        }
+
+        private void FileNameBox_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void FileNameBox_DragDrop(object sender, DragEventArgs e)
+        {
+            
+            Label label = (Label)e.Data.GetData(typeof(Label));
+            Point p = FileNameBox.PointToClient(new Point(e.X, e.Y));
+            Control control = FileNameBox.GetChildAtPoint(p);
+            int index = FileNameBox.Controls.GetChildIndex(control, false);
+            //Console.WriteLine(index);
+            filename_parts.RemoveAll(s=>s==label.Text);
+            filename_parts.Insert(index/2,label.Text);
+            FlashFileNameBox();
+            //FileNameBox.Controls.SetChildIndex(label, index);
+        }
+
+        private void DelTagTypeButton_Click(object sender, EventArgs e)
+        {
+            var name = TypesBox.SelectedItem.ToString();
+            new FileTagConfigFileHelper().DeleteTagType(name.Remove(0, 1));
+            init();
         }
     }
 }
