@@ -137,7 +137,16 @@ namespace FileNameTag
 
         private void Label_MouseMove(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left && down)
+            {
+                down = false;
+                Label label = sender as Label;
+                if (label == null)
+                {
+                    return;
+                }
+                FileNameBox.DoDragDrop(label, DragDropEffects.Move);
+            }
         }
 
         private void Label_MouseUp(object sender, MouseEventArgs e)
@@ -147,7 +156,10 @@ namespace FileNameTag
 
         private void Label_MouseDown(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == MouseButtons.Left)
+            {
+                down = true;
+            }
         }
 
         private void FIleNameBoxPartLabel_Click(object sender, EventArgs e)
