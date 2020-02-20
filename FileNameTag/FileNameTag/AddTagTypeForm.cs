@@ -66,5 +66,11 @@ namespace FileNameTag
             new FileTagConfigFileHelper().EditTagsType(FileTypesBox.Text.Replace("，", ","), TypeNameBox.Text, TagsBox.Text.Replace("，", ","));
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var editFileTypeForm = new EditFileTypesForm();
+            editFileTypeForm.ShowDialog();
+        }
     }
 }

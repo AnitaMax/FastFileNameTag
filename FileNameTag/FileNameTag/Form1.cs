@@ -464,5 +464,12 @@ namespace FileNameTag
             new FileTagConfigFileHelper().DeleteTagType(name.Remove(0, 1));
             init();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var editFileTypeForm = new EditFileTypesForm();
+            editFileTypeForm.ShowDialog();
+            init();
+        }
     }
 }

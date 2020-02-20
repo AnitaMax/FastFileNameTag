@@ -28,44 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.类型名称 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.后辍组 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.DelFIleTypeButton = new System.Windows.Forms.Button();
+            this.FileTypesGridView = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suffiexs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.FileTypesGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.类型名称,
-            this.后辍组});
-            this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.Location = new System.Drawing.Point(37, 56);
-            this.listView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(553, 242);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // 类型名称
-            // 
-            this.类型名称.Text = "类型名称";
-            this.类型名称.Width = 125;
-            // 
-            // 后辍组
-            // 
-            this.后辍组.Text = "后辍组";
-            this.后辍组.Width = 351;
             // 
             // button1
             // 
@@ -73,71 +43,95 @@
             this.button1.Location = new System.Drawing.Point(234, 336);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 28);
+            this.button1.Size = new System.Drawing.Size(101, 28);
             this.button1.TabIndex = 1;
-            this.button1.Text = "取消";
+            this.button1.Text = "退出编辑";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // SaveButton
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button2.Location = new System.Drawing.Point(425, 336);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 28);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "保存";
-            this.button2.UseVisualStyleBackColor = true;
+            this.SaveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.SaveButton.Location = new System.Drawing.Point(425, 336);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(84, 28);
+            this.SaveButton.TabIndex = 2;
+            this.SaveButton.Text = "保存";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // button3
+            // DelFIleTypeButton
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(620, 56);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 36);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "增加";
-            this.button3.UseVisualStyleBackColor = true;
+            this.DelFIleTypeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DelFIleTypeButton.Enabled = false;
+            this.DelFIleTypeButton.Location = new System.Drawing.Point(621, 37);
+            this.DelFIleTypeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DelFIleTypeButton.Name = "DelFIleTypeButton";
+            this.DelFIleTypeButton.Size = new System.Drawing.Size(82, 34);
+            this.DelFIleTypeButton.TabIndex = 4;
+            this.DelFIleTypeButton.Text = "删除";
+            this.DelFIleTypeButton.UseVisualStyleBackColor = true;
+            this.DelFIleTypeButton.Click += new System.EventHandler(this.DelFIleTypeButton_Click);
             // 
-            // button4
+            // FileTypesGridView
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(620, 120);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 34);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "删除";
-            this.button4.UseVisualStyleBackColor = true;
+            this.FileTypesGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FileTypesGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.FileTypesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.FileTypesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.name,
+            this.suffiexs});
+            this.FileTypesGridView.Location = new System.Drawing.Point(55, 37);
+            this.FileTypesGridView.Name = "FileTypesGridView";
+            this.FileTypesGridView.RowHeadersWidth = 51;
+            this.FileTypesGridView.RowTemplate.Height = 27;
+            this.FileTypesGridView.Size = new System.Drawing.Size(525, 265);
+            this.FileTypesGridView.TabIndex = 5;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "类型名";
+            this.name.MinimumWidth = 6;
+            this.name.Name = "name";
+            this.name.Width = 150;
+            // 
+            // suffiexs
+            // 
+            this.suffiexs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.suffiexs.DataPropertyName = "suffiexs";
+            this.suffiexs.HeaderText = "后辍";
+            this.suffiexs.MinimumWidth = 6;
+            this.suffiexs.Name = "suffiexs";
             // 
             // EditFileTypesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 400);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.FileTypesGridView);
+            this.Controls.Add(this.DelFIleTypeButton);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.listView1);
             this.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(755, 447);
             this.Name = "EditFileTypesForm";
             this.Text = "EditFileTypesForm";
+            ((System.ComponentModel.ISupportInitialize)(this.FileTypesGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader 类型名称;
-        private System.Windows.Forms.ColumnHeader 后辍组;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button DelFIleTypeButton;
+        private System.Windows.Forms.DataGridView FileTypesGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn suffiexs;
     }
 }

@@ -21,6 +21,25 @@ namespace FileNameTag
             return strs;
         }
     }
+    public class FileType
+    {
+        private string name;
+        private string suffiexs;
+
+        public string Name { get => name; set => name = value; }
+        public string Suffiexs { get => suffiexs; set => suffiexs = value; }
+
+
+        public FileType(string name, string suffiexs)
+        {
+            this.Name = name;
+            this.Suffiexs = suffiexs;
+        }
+
+        public FileType()
+        {
+        }
+    }
     public class IniFileHelper
     {
 
@@ -102,6 +121,8 @@ namespace FileNameTag
             }
             System.IO.File.WriteAllLines(ConfigFilePath, strs.ToArray());
         }
+
+
     }
     public class FileTagConfigFileHelper 
     {
@@ -170,6 +191,16 @@ namespace FileNameTag
             return tags;
         } 
 
+        public List<FileType> GetFileTypes()
+        {
+            List<FileType> fileTypes = new List<FileType>();
+            Section section = sections.Where<Section>(s => s.title == "文件类型").First();
+            foreach(var key in section.Contents.Keys)
+            {
+                fileTypes.Add(new FileType(key, section.Contents[key]));
+            }
+            return fileTypes;
+        }
         public void AddTagType(string target,string name,string tags)
         {
             Section section = new Section();
@@ -184,6 +215,7 @@ namespace FileNameTag
         }
         public void DeleteTagType(string name)
         {
+
             for(int i = 0; i < sections.Count; i++)
             {
                 if (sections[i].title == "#" + name)
@@ -200,23 +232,7 @@ namespace FileNameTag
             AddTagType(target, name, tags);
 
         }
-        public void AddFileType(string name, string suffiexs)
-        {
-            Section section = sections.Where<Section>(s => s.title == "[文件类型]").First();
-            section.Contents.Add(name, suffiexs);
-            IniFileHelper.Save(sections);
-        }
-        public void DeleteFileType(string name)
-        {
-            Section section = sections.Where<Section>(s => s.title == "[文件类型]").First();
-            section.Contents.Remove(name);
-            IniFileHelper.Save(sections);
-        }
-        public void EditSuffiexs(string name, string suffiexs)
-        {
-            DeleteFileType(name);
-            AddFileType(name, suffiexs);
-        }
+
     }
 
 }
