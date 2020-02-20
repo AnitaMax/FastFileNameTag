@@ -296,7 +296,6 @@
             this.MyTagBox.Name = "MyTagBox";
             this.MyTagBox.Size = new System.Drawing.Size(204, 28);
             this.MyTagBox.TabIndex = 12;
-            this.MyTagBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MyTagBox_MouseClick);
             // 
             // AddButton
             // 
@@ -406,7 +405,7 @@
             this.label4.Font = new System.Drawing.Font("宋体", 6.6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(399, 33);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 12);
+            this.label4.Size = new System.Drawing.Size(104, 11);
             this.label4.TabIndex = 23;
             this.label4.Text = "单击删除，拖拽排序";
             // 

@@ -137,16 +137,7 @@ namespace FileNameTag
 
         private void Label_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && down)
-            {
-                down = false;
-                Label label = sender as Label;
-                if (label == null)
-                {
-                    return;
-                }
-                FileNameBox.DoDragDrop(label, DragDropEffects.Move);
-            }
+
         }
 
         private void Label_MouseUp(object sender, MouseEventArgs e)
@@ -156,10 +147,7 @@ namespace FileNameTag
 
         private void Label_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                down = true;
-            }
+
         }
 
         private void FIleNameBoxPartLabel_Click(object sender, EventArgs e)
@@ -362,7 +350,8 @@ namespace FileNameTag
                 Environment.Exit(1);
             }
             MessageBox.Show("重命名成功", "成功！", MessageBoxButtons.OK);
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            Application.Exit();
 
         }
 
@@ -382,7 +371,7 @@ namespace FileNameTag
                 //创建新项command
                 reg=reg.CreateSubKey(@"*\shell\FileNameTag\Command");
                 //设置command的值
-                reg.SetValue("", this.GetType().Assembly.Location + " %1");
+                reg.SetValue("", this.GetType().Assembly.Location + " \"%1\"");
 
                 reg.Close();
                 MessageBox.Show("右键注册成功", "成功！", MessageBoxButtons.OK);
